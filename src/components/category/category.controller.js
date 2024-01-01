@@ -17,3 +17,21 @@ exports.list = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.update = async (req, res, next) => {
+  try {
+    await CategoryService.update(req.params.id, req.body);
+    return res.status(204).send();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+exports.delete = async (req, res, next) => {
+  try {
+    await CategoryService.delete(req.params.id);
+    return res.status(204).send();
+  } catch (error) {
+    return next(error);
+  }
+};

@@ -12,9 +12,7 @@ const schema = new mongoose.Schema({
 
 schema.method({
   info() {
-    return {
-      category: this,
-    };
+    return this;
   },
 
 });
