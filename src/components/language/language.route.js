@@ -10,4 +10,8 @@ router.route('/')
   .get(LanguageController.list)
   .post(isSuperuser, validate(LanguageValidation.create), LanguageController.create);
 
+router.route('/:id')
+  .put(validate(LanguageValidation.update), LanguageController.update)
+  .delete(validate(LanguageValidation.delete), LanguageController.delete);
+
 module.exports = router;

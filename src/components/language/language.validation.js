@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { MongoId } = require('../../utils/validationHelper');
 
 module.exports = {
   create: {
@@ -13,8 +14,16 @@ module.exports = {
     }),
   },
   update: {
+    params: Joi.object({
+      id: MongoId.required(),
+    }),
     body: Joi.object({
       name: Joi.string().required(),
+    }),
+  },
+  delete: {
+    params: Joi.object({
+      id: MongoId.required(),
     }),
   },
 };
