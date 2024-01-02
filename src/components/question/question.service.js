@@ -11,7 +11,7 @@ exports.list = async ({ limit = 5, offset = 0, search = '' }) => {
   const questions = await Question.find({
     $or: [
       { title: { $regex: search, $options: 'i' } },
-      { question: { $regex: search, $options: 'i' } },
+      { body: { $regex: search, $options: 'i' } },
     ],
   })
     .skip(Number(offset))

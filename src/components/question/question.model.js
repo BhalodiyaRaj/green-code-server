@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  question: {
+  body: {
     type: String,
   },
   categories: [{
@@ -29,7 +29,7 @@ schema.method({
   info() {
     return {
       title: this.title,
-      question: this.question,
+      body: this.body,
       categories: this.categories,
       level: this.level,
     };
