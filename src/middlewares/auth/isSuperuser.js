@@ -7,7 +7,7 @@ const isSuperuser = (req, res, next) => {
   jwt.verify(token, vars.jwtSecret, (err, payload) => {
     if (err) throw new Error('UNAUTHORIZED');
     if (payload.role !== 'superuser' && payload.role !== 'admin') throw new Error('FORBIDDEN');
-    req.user_id = payload.id;
+    req.userId = payload.id;
     next();
   });
 };

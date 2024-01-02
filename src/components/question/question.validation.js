@@ -4,7 +4,7 @@ module.exports = {
   create: {
     body: Joi.object({
       title: Joi.string().required().min(5).max(70),
-      question: Joi.string().required().min(5).max(500),
+      body: Joi.string().required().min(5).max(500),
       categories: Joi.array().items(Joi.string()),
       level: Joi.string().required().valid('hard', 'medium', 'easy'),
     }),
@@ -22,7 +22,7 @@ module.exports = {
     }),
     body: Joi.object({
       title: Joi.string().min(5).max(70),
-      question: Joi.string().min(5).max(500),
+      body: Joi.string().min(5).max(500),
       categories: Joi.array().items(Joi.string()),
       level: Joi.string().valid('hard', 'medium', 'easy'),
     }),
