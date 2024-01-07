@@ -37,4 +37,19 @@ schema.method({
 
 });
 
+schema.statics = {
+  async getQuestionList(search, level, categories, limit, offset) {
+    const query = {
+      $or: [
+        { title: { $regex: search, $options: 'i' } },
+        { body: { $regex: search, $options: 'i' } },
+      ],
+    };
+    if (level) query.level = level;
+    if (categories?.length) query.categories = { $all: categories };
+    const questions = await this.find(query).limit(limit).skip(offset).populate({ path: 'categories', select: 'name' });
+    return questions;
+  },
+};
+
 module.exports = mongoose.model('question', schema);

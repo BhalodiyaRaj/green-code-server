@@ -7,16 +7,10 @@ exports.create = async (questionData) => {
   return { question: newQuestion.info() };
 };
 
-exports.list = async ({ limit = 5, offset = 0, search = '' }) => {
-  const questions = await Question.find({
-    $or: [
-      { title: { $regex: search, $options: 'i' } },
-      { body: { $regex: search, $options: 'i' } },
-    ],
-  })
-    .skip(Number(offset))
-    .limit(Number(limit))
-    .populate({ path: 'categories', select: 'name' });
+exports.list = async ({
+  limit = 5, offset = 0, search = '', level, categories,
+}) => {
+  const questions = await Question.getQuestionList(search, level, categories, limit, offset);
   return questions;
 };
 

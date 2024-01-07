@@ -13,11 +13,12 @@ const validationErrorHandler = (err) => {
 };
 
 const errorHandler = (err, req, res, next) => {
-  console.log(err);
   if (err instanceof expressValidation.ValidationError) {
     const validationErrorObj = validationErrorHandler(err);
+    console.log(validationErrorObj.body.errors);
     return res.status(validationErrorObj.httpStatusCode).json(validationErrorObj.body);
   }
+  console.log(err);
   if (err.name === 'MongoServerError' && err.code === 11000) {
     const duplicateKeyErrorObj = errorCodes.DUPLICATE_KEY_VALUE;
     return res.status(duplicateKeyErrorObj.httpStatusCode).json(duplicateKeyErrorObj.body);
