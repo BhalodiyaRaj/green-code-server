@@ -11,9 +11,11 @@ module.exports = {
   },
   list: {
     query: Joi.object({
-      limit: Joi.number().default(25).max(50),
-      offset: Joi.number().default(0),
-      search: Joi.string().allow(''),
+      limit: Joi.number().default(25).max(50).default(50),
+      offset: Joi.number().default(0).default(0),
+      search: Joi.string().allow('').default(''),
+      level: Joi.string().valid('hard', 'medium', 'easy'),
+      categories: Joi.array().items(Joi.string().length(24)).single(true),
     }),
   },
   update: {
@@ -23,7 +25,7 @@ module.exports = {
     body: Joi.object({
       title: Joi.string().min(5).max(70),
       body: Joi.string().min(5).max(500),
-      categories: Joi.array().items(Joi.string()),
+      categories: Joi.array().items(Joi.string()).min(1).single(),
       level: Joi.string().valid('hard', 'medium', 'easy'),
     }),
   },
