@@ -1,16 +1,15 @@
-const Solution = require('./solution.model');
+const Solution = require('./solution.dal');
 
 exports.create = async (requestUser, solutionData) => {
-  const newSolution = new Solution({ ...solutionData, user: requestUser });
-  await newSolution.save();
-  return newSolution;
+  const result = await Solution.create({ ...solutionData, user: requestUser });
+  return result;
 };
 
 exports.list = async () => {
-  const solutions = await Solution.find();
+  const solutions = await Solution.list();
   return solutions;
 };
 
 exports.update = async (id, solutionData) => {
-  await Solution.findOneAndUpdate({ _id: id }, solutionData);
+  await Solution.update({ _id: id }, solutionData);
 };

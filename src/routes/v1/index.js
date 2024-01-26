@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const userRoute = require('./user/user.route');
-const questionRoute = require('./question/question.route');
-const categoryRoute = require('./category/category.route');
-const solutionRoute = require('./solution/solution.route');
-const languageRoute = require('./language/language.route');
+const userRoute = require('./user.route');
+const questionRoute = require('./question.route');
+const categoryRoute = require('./category.route');
+const solutionRoute = require('./solution.route');
+const languageRoute = require('./language.route');
 
 router.use('/user', userRoute);
 router.use('/question', questionRoute);
