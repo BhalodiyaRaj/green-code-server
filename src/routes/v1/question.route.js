@@ -2,8 +2,8 @@ const express = require('express');
 const { validate } = require('../../utils/validationHelper');
 const { isSuperuser } = require('../../middlewares/auth');
 
-const QuestionValidation = require('./question.validation');
-const QuestionController = require('./question.controller');
+const QuestionValidation = require('../../components/question/question.validation');
+const QuestionController = require('../../components/question/question.controller');
 
 const router = express.Router();
 

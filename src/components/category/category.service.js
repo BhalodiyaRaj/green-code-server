@@ -1,20 +1,19 @@
-const Category = require('./category.model');
+const CategoryDal = require('./category.dal');
 
 exports.create = async (categoryData) => {
-  const newCategory = await new Category(categoryData);
-  await newCategory.save();
+  const newCategory = await CategoryDal.create(categoryData);
   return newCategory;
 };
 
 exports.list = async () => {
-  const categories = await Category.find();
+  const categories = await CategoryDal.list();
   return categories;
 };
 
 exports.update = async (categoryId, categoryData) => {
-  await Category.findOneAndUpdate({ _id: categoryId }, categoryData);
+  await CategoryDal.update(categoryId, categoryData);
 };
 
 exports.delete = async (categoryId) => {
-  await Category.findOneAndDelete({ _id: categoryId });
+  await CategoryDal.delete(categoryId);
 };

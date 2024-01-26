@@ -1,35 +1,30 @@
-const Question = require('./question.model');
-const Like = require('../like/like.model');
+const QuestionDal = require('./question.dal');
+const Like = require('../../models/like.model');
 
 exports.create = async (questionData) => {
-  const newQuestion = new Question(questionData);
-  await newQuestion.save();
-  return { question: newQuestion.info() };
+  const newQuestion = await QuestionDal.create(questionData);
+  return { question: newQuestion };
 };
 
 exports.list = async ({
   limit = 5, offset = 0, search = '', level, categories,
 }) => {
-  const questions = await Question.getQuestionList(search, level, categories, limit, offset);
+  const questions = await QuestionDal.list(search, level, categories, limit, offset);
   return questions;
 };
 
-// service for getting one question
-
 exports.getOne = async (questionId, requestUser) => {
   const [question, like] = await Promise.all([
-    await Question.findOne({ _id: questionId }),
-    await Like.findOne({ user: requestUser, model: questionId, reference: 'question' }),
+    await QuestionDal.getById(questionId),
+    await Like.findOne({ user: requestUser, reference: questionId, type: 'question' }),
   ]);
   if (like) question.liked = true;
   return question;
 };
 
 exports.update = async (questionId, questionData) => {
-  await Question.findOneAndUpdate({ _id: questionId }, questionData);
+  await QuestionDal.update(questionId, questionData);
 };
-
-// create service for like question
 
 exports.like = async (questionId, userId) => {
   const like = await Like.findOne({ reference: questionId, user: userId, type: 'question' });
@@ -37,7 +32,6 @@ exports.like = async (questionId, userId) => {
     await Like.deleteOne({ _id: like._id });
     return { message: 'unlike' };
   }
-  const newLike = new Like({ question: questionId, user: userId });
-  await newLike.save();
+  await Like.create({ reference: questionId, user: userId, type: 'question' });
   return { message: 'like' };
 };

@@ -1,8 +1,8 @@
 const express = require('express');
 const { validate } = require('express-validation');
 const { isSuperuser } = require('../../middlewares/auth');
-const LanguageController = require('./language.controller');
-const LanguageValidation = require('./language.validation');
+const LanguageController = require('../../components/language/language.controller');
+const LanguageValidation = require('../../components/language/language.validation');
 
 const router = express.Router();
 

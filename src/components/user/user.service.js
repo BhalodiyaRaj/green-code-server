@@ -1,12 +1,11 @@
-const User = require('./user.model');
+const UserDal = require('./user.dal');
 
 exports.register = async (userData) => {
-  const newUser = new User(userData);
-  await newUser.save();
+  const newUser = await UserDal.create(userData);
   return { user: newUser.info() };
 };
 
 exports.login = async ({ username, password }) => {
-  const result = await User.findOneAndGenerateToken({ username, password });
+  const result = await UserDal.findOneAndGenerateToken(username, password);
   return result;
 };

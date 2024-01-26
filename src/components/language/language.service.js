@@ -1,20 +1,19 @@
-const Language = require('./language.model');
+const LanguageDal = require('./language.dal');
 
 exports.create = async (languageData) => {
-  const newLanguage = new Language(languageData);
-  await newLanguage.save();
+  const newLanguage = await LanguageDal.create(languageData);
   return newLanguage;
 };
 
 exports.list = async () => {
-  const languages = await Language.find();
+  const languages = await LanguageDal.list();
   return languages;
 };
 
 exports.update = async (languageId, languageData) => {
-  await Language.findOneAndUpdate({ _id: languageId }, languageData);
+  await LanguageDal.update(languageId, languageData);
 };
 
 exports.delete = async (languageId) => {
-  await Language.findOneAndDelete({ _id: languageId });
+  await LanguageDal.delete(languageId);
 };

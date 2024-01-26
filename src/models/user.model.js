@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const vars = require('../../config/vars');
+const vars = require('../config/vars');
 
 const schema = new mongoose.Schema({
   username: {
@@ -52,12 +52,7 @@ schema.method({
 });
 
 schema.statics = {
-  async findOneAndGenerateToken({ username, password }) {
-    const user = await this.findOne({ $or: [{ username }, { email: username }] });
-    if (!user) throw new Error('RESOURCE_NOT_FOUND');
-    if (!await user.comparePassword(password)) throw new Error('INVALID_DATA');
-    return { user: user.info(), token: user.token() };
-  },
+
 };
 
 module.exports = mongoose.model('user', schema);
