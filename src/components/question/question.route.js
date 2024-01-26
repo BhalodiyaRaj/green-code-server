@@ -12,6 +12,7 @@ router.route('/')
   .post(isSuperuser, validate(QuestionValidation.create), QuestionController.create);
 
 router.route('/:id')
+  .get(validate(QuestionValidation.getOne), QuestionController.getOne)
   .put(isSuperuser, validate(QuestionValidation.update), QuestionController.update);
 
 module.exports = router;

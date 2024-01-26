@@ -50,6 +50,7 @@ schema.statics = {
     const questions = await this.find(query).limit(limit).skip(offset).populate({ path: 'categories', select: 'name' });
     return questions;
   },
+
 };
 
 module.exports = mongoose.model('question', schema);

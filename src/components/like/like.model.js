@@ -6,12 +6,12 @@ const schema = new mongoose.Schema({
     required: true,
     ref: 'user',
   },
-  model: {
+  reference: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    refPath: 'reference',
+    refPath: 'type',
   },
-  reference: {
+  type: {
     type: String,
     required: true,
     enum: ['question', 'comment'],

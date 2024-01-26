@@ -18,6 +18,15 @@ exports.list = async (req, res, next) => {
   }
 };
 
+exports.getOne = async (req, res, next) => {
+  try {
+    const question = await QuestionService.getOne(req.params.id, req.userId);
+    return res.status(200).json(question);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 exports.update = async (req, res, next) => {
   try {
     await QuestionService.update(req.params.id, req.body);
