@@ -14,6 +14,17 @@ exports.list = async ({
   return questions;
 };
 
+// service for getting one question
+
+exports.getOne = async (questionId, requestUser) => {
+  const [question, like] = await Promise.all([
+    await Question.findOne({ _id: questionId }),
+    await Like.findOne({ user: requestUser, model: questionId, reference: 'question' }),
+  ]);
+  if (like) question.liked = true;
+  return question;
+};
+
 exports.update = async (questionId, questionData) => {
   await Question.findOneAndUpdate({ _id: questionId }, questionData);
 };
@@ -21,7 +32,7 @@ exports.update = async (questionId, questionData) => {
 // create service for like question
 
 exports.like = async (questionId, userId) => {
-  const like = await Like.findOne({ reference: questionId, user: userId, model: 'question' });
+  const like = await Like.findOne({ reference: questionId, user: userId, type: 'question' });
   if (like) {
     await Like.deleteOne({ _id: like._id });
     return { message: 'unlike' };

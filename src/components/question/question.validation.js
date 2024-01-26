@@ -18,6 +18,11 @@ module.exports = {
       categories: Joi.array().items(Joi.string().length(24)).single(true),
     }),
   },
+  getOne: {
+    params: Joi.object({
+      id: Joi.string().hex().length(24).required(),
+    }),
+  },
   update: {
     params: Joi.object({
       id: Joi.string().hex().length(24).required(),

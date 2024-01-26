@@ -10,4 +10,7 @@ router.route('/')
   .get(validate(SolutionValidation.list), SolutionController.list)
   .post(isSuperuser, validate(SolutionValidation.create), SolutionController.create);
 
+router.route('/:id')
+  .put(isSuperuser, validate(SolutionValidation.update), SolutionController.update);
+
 module.exports = router;

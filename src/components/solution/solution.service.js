@@ -10,3 +10,7 @@ exports.list = async () => {
   const solutions = await Solution.find();
   return solutions;
 };
+
+exports.update = async (id, solutionData) => {
+  await Solution.findOneAndUpdate({ _id: id }, solutionData);
+};
