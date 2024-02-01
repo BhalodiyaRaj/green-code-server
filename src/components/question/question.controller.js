@@ -11,7 +11,7 @@ exports.create = async (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const questions = await QuestionService.list(req.query);
+    const questions = await QuestionService.list({ ...req.query, user: req.userId });
     return res.status(200).json(questions);
   } catch (error) {
     return next(error);

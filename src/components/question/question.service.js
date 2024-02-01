@@ -7,9 +7,9 @@ exports.create = async (questionData) => {
 };
 
 exports.list = async ({
-  limit = 5, offset = 0, search = '', level, categories,
+  limit = 5, offset = 0, search = '', level, categories, user,
 }) => {
-  const questions = await QuestionDal.list(search, level, categories, limit, offset);
+  const questions = await QuestionDal.list(search, level, categories, limit, offset, user);
   return questions;
 };
 
