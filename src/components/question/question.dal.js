@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Question = require('../../models/question.model');
 
 exports.model = Question;
@@ -8,7 +9,7 @@ exports.create = async (questionData) => {
   return newQuestion.info();
 };
 
-exports.list = async (search, level, categories, limit, offset, user) => {
+exports.list = async (search, level, categories, limit, offset, requestUser) => {
   const aggregationMatch = {
     $or: [
       { title: { $regex: search, $options: 'i' } },
@@ -45,12 +46,12 @@ exports.list = async (search, level, categories, limit, offset, user) => {
       },
     },
   ];
-  if (user) {
+  if (requestUser) {
     pipeline.push({
       $addFields: {
         isLiked: {
           $cond: {
-            if: { $in: [user, '$likesArray.user'] },
+            if: { $in: [requestUser, '$likesArray.user'] },
             then: true,
             else: false,
           },
@@ -68,9 +69,56 @@ exports.list = async (search, level, categories, limit, offset, user) => {
   return questions;
 };
 
-exports.getById = async (id) => {
-  const question = await Question.findOne({ _id: id });
-  return question;
+exports.getById = async (id, requestUser) => {
+  const pipeline = [
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(id),
+      },
+    },
+    {
+      $lookup: {
+        from: 'categories',
+        localField: 'categories',
+        foreignField: '_id',
+        as: 'categories',
+      },
+    },
+    {
+      $lookup: {
+        from: 'likes',
+        localField: '_id',
+        foreignField: 'reference',
+        as: 'likesArray',
+      },
+    },
+    {
+      $addFields: {
+        likes: { $size: '$likesArray' },
+      },
+    },
+  ];
+  if (requestUser) {
+    pipeline.push({
+      $addFields: {
+        isLiked: {
+          $cond: {
+            if: { $in: [requestUser, '$likesArray.user'] },
+            then: true,
+            else: false,
+          },
+        },
+      },
+    });
+  }
+  pipeline.push({
+    $project: {
+      likesArray: 0,
+    },
+  });
+
+  const question = await Question.aggregate(pipeline);
+  return question[0];
 };
 
 exports.update = async (questionId, data) => {

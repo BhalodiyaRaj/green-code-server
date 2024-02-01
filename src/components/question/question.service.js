@@ -14,11 +14,7 @@ exports.list = async ({
 };
 
 exports.getOne = async (questionId, requestUser) => {
-  const [question, like] = await Promise.all([
-    await QuestionDal.getById(questionId),
-    await Like.findOne({ user: requestUser, reference: questionId, type: 'question' }),
-  ]);
-  if (like) question.liked = true;
+  const question = await QuestionDal.getById(questionId, requestUser);
   return question;
 };
 
