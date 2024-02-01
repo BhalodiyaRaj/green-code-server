@@ -1,6 +1,7 @@
 const express = require('express');
 const { validate } = require('../../utils/validationHelper');
 const { isSuperuser } = require('../../middlewares/auth');
+const parseUser = require('../../middlewares/parseUser');
 
 const QuestionValidation = require('../../components/question/question.validation');
 const QuestionController = require('../../components/question/question.controller');
@@ -8,7 +9,7 @@ const QuestionController = require('../../components/question/question.controlle
 const router = express.Router();
 
 router.route('/')
-  .get(validate(QuestionValidation.list), QuestionController.list)
+  .get(parseUser, validate(QuestionValidation.list), QuestionController.list)
   .post(isSuperuser, validate(QuestionValidation.create), QuestionController.create);
 
 router.route('/:id')
