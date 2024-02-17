@@ -27,8 +27,11 @@ exports.list = async (search, level, categories, limit, offset, requestUser) => 
     {
       $lookup: {
         from: 'categories',
-        localField: 'categories',
-        foreignField: '_id',
+        let: { categories: '$categories' },
+        pipeline: [
+          { $match: { $expr: { $in: ['$_id', '$$categories'] } } },
+          { $project: { _id: 1, name: 1 } },
+        ],
         as: 'categories',
       },
     },
@@ -41,20 +44,14 @@ exports.list = async (search, level, categories, limit, offset, requestUser) => 
       },
     },
     {
-      $addFields: {
-        likes: { $size: '$likesArray' },
-      },
+      $addFields: { likes: { $size: '$likesArray' } },
     },
   ];
   if (requestUser) {
     pipeline.push({
       $addFields: {
         isLiked: {
-          $cond: {
-            if: { $in: [requestUser, '$likesArray.user'] },
-            then: true,
-            else: false,
-          },
+          $cond: { if: { $in: [requestUser, '$likesArray.user'] }, then: true, else: false },
         },
       },
     });
@@ -79,8 +76,11 @@ exports.getById = async (id, requestUser) => {
     {
       $lookup: {
         from: 'categories',
-        localField: 'categories',
-        foreignField: '_id',
+        let: { categories: '$categories' },
+        pipeline: [
+          { $match: { $expr: { $in: ['$_id', '$$categories'] } } },
+          { $project: { _id: 1, name: 1 } },
+        ],
         as: 'categories',
       },
     },
@@ -93,20 +93,14 @@ exports.getById = async (id, requestUser) => {
       },
     },
     {
-      $addFields: {
-        likes: { $size: '$likesArray' },
-      },
+      $addFields: { likes: { $size: '$likesArray' } },
     },
   ];
   if (requestUser) {
     pipeline.push({
       $addFields: {
         isLiked: {
-          $cond: {
-            if: { $in: [requestUser, '$likesArray.user'] },
-            then: true,
-            else: false,
-          },
+          $cond: { if: { $in: [requestUser, '$likesArray.user'] }, then: true, else: false },
         },
       },
     });

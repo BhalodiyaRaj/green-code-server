@@ -1,16 +1,15 @@
 const express = require('express');
 const { validate } = require('express-validation');
 const { isSuperuser } = require('../../middlewares/auth');
-const SolutionController = require('../../components/solution/solution.controller');
-const SolutionValidation = require('../../components/solution/solution.validation');
+const Solution = require('../../components/solution');
 
 const router = express.Router();
 
 router.route('/')
-  .get(validate(SolutionValidation.list), SolutionController.list)
-  .post(isSuperuser, validate(SolutionValidation.create), SolutionController.create);
+  .get(validate(Solution.validation.list), Solution.controller.list)
+  .post(isSuperuser, validate(Solution.validation.create), Solution.controller.create);
 
 router.route('/:id')
-  .put(isSuperuser, validate(SolutionValidation.update), SolutionController.update);
+  .put(isSuperuser, validate(Solution.validation.update), Solution.controller.update);
 
 module.exports = router;

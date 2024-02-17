@@ -1,17 +1,16 @@
 const express = require('express');
 const { validate } = require('express-validation');
 const { isSuperuser } = require('../../middlewares/auth');
-const LanguageController = require('../../components/language/language.controller');
-const LanguageValidation = require('../../components/language/language.validation');
+const Language = require('../../components/language');
 
 const router = express.Router();
 
 router.route('/')
-  .get(LanguageController.list)
-  .post(isSuperuser, validate(LanguageValidation.create), LanguageController.create);
+  .get(Language.controller.list)
+  .post(isSuperuser, validate(Language.validation.create), Language.controller.create);
 
 router.route('/:id')
-  .put(validate(LanguageValidation.update), LanguageController.update)
-  .delete(validate(LanguageValidation.delete), LanguageController.delete);
+  .put(validate(Language.validation.update), Language.controller.update)
+  .delete(validate(Language.validation.delete), Language.controller.delete);
 
 module.exports = router;

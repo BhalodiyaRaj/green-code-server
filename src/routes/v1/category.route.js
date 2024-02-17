@@ -1,16 +1,15 @@
 const express = require('express');
 const { validate } = require('express-validation');
-const CategoryController = require('../../components/category/category.controller');
-const CategoryValidation = require('../../components/category/category.validation');
+const Category = require('../../components/category');
 
 const router = express.Router();
 
 router.route('/')
-  .get(CategoryController.list)
-  .post(validate(CategoryValidation.create), CategoryController.create);
+  .get(Category.controller.list)
+  .post(validate(Category.validation.create), Category.controller.create);
 
 router.route('/:id')
-  .put(validate(CategoryValidation.update), CategoryController.update)
-  .delete(validate(CategoryValidation.delete), CategoryController.delete);
+  .put(validate(Category.validation.update), Category.controller.update)
+  .delete(validate(Category.validation.delete), Category.controller.delete);
 
 module.exports = router;
