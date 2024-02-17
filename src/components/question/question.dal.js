@@ -1,13 +1,45 @@
+/* eslint-disable no-multiple-empty-lines */
 const mongoose = require('mongoose');
 const Question = require('../../models/question.model');
 
+
+
+/**
+ * The Question model.
+ *
+ * @type {Question}
+ */
+
 exports.model = Question;
+
+
+/**
+ * Create a new question
+ *
+ * @param {Object} questionData
+ * @returns
+ */
 
 exports.create = async (questionData) => {
   const newQuestion = new Question(questionData);
   await newQuestion.save();
   return newQuestion.info();
 };
+
+
+
+
+/**
+ * Retrieve a list of questions from the database based several filters.
+ *
+ * @param {string} search - The search keyword to match against the question title or body.
+ * @param {string} level - The level of the questions.
+ * @param {Array<string>} categories - An array of category IDs to filter the questions.
+ * @param {number} limit - The maximum number of questions to retrieve.
+ * @param {number} offset - The number of questions to skip before retrieving.
+ * @param {string} requestUser - The ID of the user making the request.
+ * @returns {Promise<Array<Object>>} - A promise that resolves to an array of question objects.
+ */
 
 exports.list = async (search, level, categories, limit, offset, requestUser) => {
   const aggregationMatch = {
@@ -43,9 +75,7 @@ exports.list = async (search, level, categories, limit, offset, requestUser) => 
         as: 'likesArray',
       },
     },
-    {
-      $addFields: { likes: { $size: '$likesArray' } },
-    },
+    { $addFields: { likes: { $size: '$likesArray' } } },
   ];
   if (requestUser) {
     pipeline.push({
@@ -56,23 +86,27 @@ exports.list = async (search, level, categories, limit, offset, requestUser) => 
       },
     });
   }
-  pipeline.push({
-    $project: {
-      likesArray: 0,
-    },
-  });
+  pipeline.push({ $project: { likesArray: 0 } });
 
   const questions = await Question.aggregate(pipeline);
   return questions;
 };
 
+
+
+
+
+/**
+ * Retrieve a single question from the database by its id.
+ *
+ * @param {string} id - The ID of the question to retrieve.
+ * @param {string} requestUser - The ID of the user making the request.
+ * @returns {Promise<Object>} - A promise that resolves to a question object.
+ */
+
 exports.getById = async (id, requestUser) => {
   const pipeline = [
-    {
-      $match: {
-        _id: new mongoose.Types.ObjectId(id),
-      },
-    },
+    { $match: { _id: new mongoose.Types.ObjectId(id) } },
     {
       $lookup: {
         from: 'categories',
@@ -92,9 +126,7 @@ exports.getById = async (id, requestUser) => {
         as: 'likesArray',
       },
     },
-    {
-      $addFields: { likes: { $size: '$likesArray' } },
-    },
+    { $addFields: { likes: { $size: '$likesArray' } } },
   ];
   if (requestUser) {
     pipeline.push({
@@ -105,15 +137,24 @@ exports.getById = async (id, requestUser) => {
       },
     });
   }
-  pipeline.push({
-    $project: {
-      likesArray: 0,
-    },
-  });
+
+  pipeline.push({ $project: { likesArray: 0 } });
 
   const question = await Question.aggregate(pipeline);
   return question[0];
 };
+
+
+
+
+
+/**
+ * Update a question in the database.
+ *
+ * @param {string} questionId - The ID of the question to update.
+ * @param {Object} data - The updated question data.
+ * @returns {Promise<void>} - A promise that resolves when the question is updated.
+ */
 
 exports.update = async (questionId, data) => {
   await Question.findOneAndUpdate({ _id: questionId }, data);
