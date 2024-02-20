@@ -1,0 +1,41 @@
+{
+  "info": {
+    "title": "Green Code",
+    "version": "1.0.0",
+    "termsOfService": "https://zuru.tech/terms",
+    "contact": {
+      "email": "rraiyani@gmail.com"
+    }
+  },
+  "host": "localhost:3007/v1",
+  "apis": [
+    "./src/routes/**/*.route.js"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "paths": {
+    "/language": {
+      "get": {
+        "summary": "List languages",
+        "tags": [
+          "language"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - request succeeded",
+            "schema": {
+              "$ref": "components/language.yaml#/list/response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {},
+  "tags": []
+}

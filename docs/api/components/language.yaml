@@ -1,0 +1,5 @@
+list:
+  response:
+    type: string
+    format: uuid
+    required: true
