@@ -1,0 +1,11 @@
+openapi: "3.0.0"
+info:
+  title: "Green Code"
+  version: "1.0.0"
+  termsOfService: "https://zuru.tech/terms"
+  contact:
+    email: "rraiyani@gmail.com"
+
+host: "localhost:3007/v1"
+apis: ["./src/routes/**/*.route.js"]
+schemes: ["https"]

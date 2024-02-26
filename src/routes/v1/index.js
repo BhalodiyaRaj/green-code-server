@@ -8,6 +8,7 @@ const categoryRoute = require('./category.route');
 const solutionRoute = require('./solution.route');
 const languageRoute = require('./language.route');
 
+router.use('/docs', express.static('docs/api'));
 router.use('/user', userRoute);
 router.use('/question', questionRoute);
 router.use('/category', categoryRoute);
