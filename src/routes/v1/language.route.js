@@ -16,7 +16,7 @@ const router = express.Router();
  *       200:
  *         description: OK - request succeeded
  *         schema:
- *           $ref: 'components/language.yaml#/list/response'
+ *           $ref: 'components/language.yaml#/list'
  *
  */
 

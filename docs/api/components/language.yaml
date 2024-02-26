@@ -1,5 +1,6 @@
 list:
-  response:
-    type: string
-    format: uuid
-    required: true
+  type: object
+  properties:
+    id:
+      type: string
+      description: The language's unique identifier.

@@ -11,9 +11,9 @@ module.exports = {
   },
   list: {
     query: Joi.object({
-      limit: Joi.number().default(25).max(50).default(50),
-      offset: Joi.number().default(0).default(0),
-      search: Joi.string().allow('').default(''),
+      limit: Joi.number().default(25).max(50),
+      offset: Joi.number().default(0),
+      search: Joi.string().allow(''),
       level: Joi.string().valid('hard', 'medium', 'easy'),
       categories: Joi.array().items(Joi.string().length(24)).single(true),
     }),
