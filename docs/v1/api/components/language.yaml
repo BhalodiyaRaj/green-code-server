@@ -1,6 +1,7 @@
 list:
-  type: object
-  properties:
-    id:
-      type: string
-      description: The language's unique identifier.
+  response:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The language's unique identifier.

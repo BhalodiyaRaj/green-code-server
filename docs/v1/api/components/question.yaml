@@ -1,0 +1,10 @@
+list:
+  response:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The question's unique identifier.
+      title:
+        type: string
+        description: The question's title.

@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 module.exports = {
+
   create: {
     body: Joi.object({
       title: Joi.string().required().min(5).max(70),
@@ -9,6 +10,7 @@ module.exports = {
       level: Joi.string().required().valid('hard', 'medium', 'easy'),
     }),
   },
+
   list: {
     query: Joi.object({
       limit: Joi.number().default(25).max(50),
@@ -18,11 +20,13 @@ module.exports = {
       categories: Joi.array().items(Joi.string().length(24)).single(true),
     }),
   },
+
   getOne: {
     params: Joi.object({
       id: Joi.string().hex().length(24).required(),
     }),
   },
+
   update: {
     params: Joi.object({
       id: Joi.string().hex().length(24).required(),
@@ -34,4 +38,5 @@ module.exports = {
       level: Joi.string().valid('hard', 'medium', 'easy'),
     }),
   },
+
 };
