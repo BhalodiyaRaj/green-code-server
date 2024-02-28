@@ -48,6 +48,7 @@ exports.list = async (search, level, categories, limit, offset, requestUser) => 
       { body: { $regex: search, $options: 'i' } },
     ],
   };
+
   if (level) aggregationMatch.level = level;
   if (categories?.length) aggregationMatch.categories = { $all: categories };
 

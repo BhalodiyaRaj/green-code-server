@@ -8,11 +8,11 @@ const categoryRoute = require('./category.route');
 const solutionRoute = require('./solution.route');
 const languageRoute = require('./language.route');
 
-router.use('/docs', express.static('docs/api'));
-router.use('/user', userRoute);
-router.use('/question', questionRoute);
-router.use('/category', categoryRoute);
-router.use('/solution', solutionRoute);
-router.use('/language', languageRoute);
+router.use('/docs', express.static('docs/v1/api'));
+router.use('/users', userRoute);
+router.use('/questions', questionRoute);
+router.use('/categories', categoryRoute);
+router.use('/solutions', solutionRoute);
+router.use('/languages', languageRoute);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 module.exports = {
+
   register: {
     body: Joi.object({
       username: Joi.string().required().min(3).max(50),
@@ -15,4 +16,5 @@ module.exports = {
       password: Joi.string().required().max(128),
     }),
   },
+
 };
