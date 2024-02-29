@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "npx swagger-jsdoc ./src/routes/**/*.route.js -d docs/v1/api/swagger.yaml -o docs/v1/api/openApiSpecs.json"
+    "docs": "npx swagger-jsdoc ./src/routes/*/*.route.js -d docs/v1/api/swagger.yaml -o docs/v1/api/openApiSpecs.json"
   },
   "keywords": [],
   "author": "",
