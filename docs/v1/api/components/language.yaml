@@ -1,7 +1,37 @@
 list:
   response:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: integer
+          description: The unique identifier of the language.
+        name:
+          type: string
+          description: The name of the language.
+
+create:
+  request:
     type: object
     properties:
-      id:
+      name:
         type: string
-        description: The language's unique identifier.
+        description: The name of the language.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the language.
+      name:
+        type: string
+        description: The name of the language.
+
+update:
+  request:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the language.

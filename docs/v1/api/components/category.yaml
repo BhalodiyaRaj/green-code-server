@@ -1,0 +1,46 @@
+list:
+  response:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: integer
+          description: The unique identifier of the category.
+        name:
+          type: string
+          description: The name of the category.
+
+create:
+  request:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the category.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the category.
+      name:
+        type: string
+        description: The name of the category.
+
+update:
+  request:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the category.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the category.
+      name:
+        type: string
+        description: The name of the category.

@@ -1,0 +1,31 @@
+response:
+  error:
+    type: object
+    properties:
+      code:
+        type: string
+        description: Error code
+      message:
+        type: string
+        description: Error message
+  validation:
+    type: object
+    properties:
+      code:
+        type: string
+        description: Error code
+      errors:
+        type: array
+        items:
+          type: object
+          properties:
+            location:
+              type: string
+              description: Location of the error
+            field:
+              type: string
+              description: Field name
+            message:
+              type: array
+              items:
+                type: string

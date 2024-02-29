@@ -1,10 +1,177 @@
 list:
   response:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: integer
+          description: The unique identifier of the question.
+        title:
+          type: string
+          description: The question.
+        question:
+          type: string
+          description: The answer to the question.
+        level:
+          type: string
+          description: The level of the question.
+        categories:
+          type: array
+          description: The categories of the question.
+          items:
+            type: object
+            properties:
+              _id:
+                type: integer
+                description: The unique identifier of the category.
+              name:
+                type: string
+                description: The name of the category.
+        likes:
+          type: number
+          description: The number of likes the question has.
+        isLiked:
+          type: boolean
+          description: Whether the question is liked or not.
+
+create:
+  request:
     type: object
     properties:
-      id:
-        type: string
-        description: The question's unique identifier.
       title:
         type: string
-        description: The question's title.
+        description: The question.
+      question:
+        type: string
+        description: The answer to the question.
+      level:
+        type: string
+        description: The level of the question.
+      categories:
+        type: array
+        description: The categories of the question.
+        items:
+          type: integer
+          description: The unique identifier of the category.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the question.
+      title:
+        type: string
+        description: The question.
+      question:
+        type: string
+        description: The answer to the question.
+      level:
+        type: string
+        description: The level of the question.
+      categories:
+        type: array
+        description: The categories of the question.
+        items:
+          type: object
+          properties:
+            _id:
+              type: integer
+              description: The unique identifier of the category.
+            name:
+              type: string
+              description: The name of the category.
+      likes:
+        type: number
+        description: The number of likes the question has.
+      isLiked:
+        type: boolean
+        description: Whether the question is liked or not.
+
+get:
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the question.
+      title:
+        type: string
+        description: The question.
+      question:
+        type: string
+        description: The answer to the question.
+      level:
+        type: string
+        description: The level of the question.
+      categories:
+        type: array
+        description: The categories of the question.
+        items:
+          type: object
+          properties:
+            _id:
+              type: integer
+              description: The unique identifier of the category.
+            name:
+              type: string
+              description: The name of the category.
+      likes:
+        type: number
+        description: The number of likes the question has.
+      isLiked:
+        type: boolean
+        description: Whether the question is liked or not.
+
+update:
+  request:
+    type: object
+    properties:
+      title:
+        type: string
+        description: The question.
+      question:
+        type: string
+        description: The answer to the question.
+      level:
+        type: string
+        description: The level of the question.
+      categories:
+        type: array
+        description: The categories of the question.
+        items:
+          type: integer
+          description: The unique identifier of the category.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the question.
+      title:
+        type: string
+        description: The question.
+      question:
+        type: string
+        description: The answer to the question.
+      level:
+        type: string
+        description: The level of the question.
+      categories:
+        type: array
+        description: The categories of the question.
+        items:
+          type: object
+          properties:
+            _id:
+              type: integer
+              description: The unique identifier of the category.
+            name:
+              type: string
+              description: The name of the category.
+      likes:
+        type: number
+        description: The number of likes the question has.
+      isLiked:
+        type: boolean
+        description: Whether the question is liked or not.

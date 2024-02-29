@@ -6,6 +6,6 @@ info:
   contact:
     email: "rraiyani@gmail.com"
 
-host: "localhost:3007/v1"
-apis: ["./src/routes/**/*.route.js"]
+host: "localhost:3007/api/v1"
+apis: ["./src/routes/*/*.route.js"]
 schemes: ["https"]

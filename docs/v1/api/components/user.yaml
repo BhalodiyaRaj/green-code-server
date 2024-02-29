@@ -1,0 +1,54 @@
+register:
+  request:
+    type: object
+    properties:
+      username:
+        type: string
+        description: The username of the user.
+      email:
+        type: string
+        description: The email of the user.
+      password:
+        type: string
+        description: The password of the user.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the user.
+      username:
+        type: string
+        description: The username of the user.
+      email:
+        type: string
+        description: The email of the user.
+      role:
+        type: string
+        description: The role of the user.
+
+login:
+  request:
+    type: object
+    properties:
+      username:
+        type: string
+        description: The email of the user.
+      password:
+        type: string
+        description: The password of the user.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the user.
+      username:
+        type: string
+        description: The username of the user.
+      email:
+        type: string
+        description: The email of the user.
+      role:
+        type: string
+        description: The role of the user.

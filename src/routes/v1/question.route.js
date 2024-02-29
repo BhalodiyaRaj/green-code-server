@@ -42,19 +42,159 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: A list of questions
- *         schema:
- *           $ref: 'components/question.yaml#/list/response'
- *
- *
- *
- *
- *
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/question.yaml#/list/response'
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/validation'
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
+ *   post:
+ *     summary: Create Question
+ *     tags:
+ *       - Question
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: 'components/question.yaml#/create/request'
+ *     responses:
+ *       200:
+ *         description: A question
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/question.yaml#/create/response'
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/validation'
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
  */
 
 router.route('/')
   .get(parseUser, validate(Question.validation.list), Question.controller.list)
   .post(isSuperuser, validate(Question.validation.create), Question.controller.create);
 
+/**
+ * @swagger
+ * /questions/{id}:
+ *   get:
+ *     summary: Get Question
+ *     tags:
+ *       - Question
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         type: string
+ *         in: path
+ *         description: Question ID
+ *     responses:
+ *       200:
+ *         description: A question
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/question.yaml#/get/response'
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/validation'
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
+ *   put:
+ *     summary: Update Question
+ *     tags:
+ *       - Question
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         type: string
+ *         in: path
+ *         description: Question ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: 'components/question.yaml#/update/request'
+ *     responses:
+ *       200:
+ *         description: A question
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/question.yaml#/update/response'
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/validation'
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
+ */
 router.route('/:id')
   .get(parseUser, validate(Question.validation.getOne), Question.controller.getOne)
   .put(isSuperuser, validate(Question.validation.update), Question.controller.update);
