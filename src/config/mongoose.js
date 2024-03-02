@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 const { mongo } = require('./vars');
+const Logger = require('../lib/logger');
 
 // Exit application on error
 mongoose.connection.on('error', (err) => {
-  console.error(`MongoDB connection error: ${err}`);
+  Logger.error(`Database connection error : ${err}`);
   process.exit(-1);
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('database connection..... done');
+  Logger.info('Database connected successfully');
 });
 
 exports.connect = (cb) => {

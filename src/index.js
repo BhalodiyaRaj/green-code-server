@@ -5,14 +5,15 @@ require('./config/mongoose').connect();
 const http = require('http');
 const vars = require('./config/vars');
 const app = require('./app');
+const Logger = require('./lib/logger');
 
 const server = http.createServer(app);
 
 const { port, env } = vars;
-console.log('ENV : ', env);
+Logger.info(`ENV : ${env}`);
 
 server.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  Logger.info(`Server PORT : ${port}`);
 });
 
 module.exports = app;
