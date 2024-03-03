@@ -1,0 +1,83 @@
+create:
+  request:
+    type: object
+    properties:
+      title:
+        type: string
+        description: The title of the solution.
+      language:
+        type: string
+        description: The unique identifier of the language of the solution.
+      code:
+        type: string
+        description: The code of the solution.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the solution.
+
+list:
+  response:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: integer
+          description: The unique identifier of the solution.
+        language:
+          type: object
+          description: The language of the solution.
+          properties:
+            _id:
+              type: integer
+              description: The unique identifier of the language.
+            name:
+              type: string
+              description: The name of the language.
+        title:
+          type: string
+          description: The title of the solution.
+        code:
+          type: string
+          description: The code of the solution.
+
+get:
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the solution.
+      language:
+        type: object
+        description: The language of the solution.
+        properties:
+          _id:
+            type: integer
+            description: The unique identifier of the language.
+          name:
+            type: string
+            description: The name of the language.
+      title:
+        type: string
+        description: The title of the solution.
+      code:
+        type: string
+        description: The code of the solution.
+
+update:
+  request:
+    type: object
+    properties:
+      title:
+        type: string
+        description: The title of the solution.
+      language:
+        type: string
+        description: The unique identifier of the language of the solution.
+      code:
+        type: string
+        description: The code of the solution.

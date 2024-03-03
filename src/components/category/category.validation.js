@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { MongoId } = require('../../utils/validationHelper');
+const { Schema } = require('../../utils/validationHelper');
 
 module.exports = {
   create: {
@@ -9,7 +9,7 @@ module.exports = {
   },
   update: {
     params: Joi.object({
-      id: MongoId.required(),
+      id: Schema.mongoId.required(),
     }),
     body: Joi.object({
       name: Joi.string().min(3).max(50),
@@ -17,7 +17,7 @@ module.exports = {
   },
   delete: {
     params: Joi.object({
-      id: MongoId.required(),
+      id: Schema.mongoId.required(),
     }),
   },
 };

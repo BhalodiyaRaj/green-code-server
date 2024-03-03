@@ -1,15 +1,20 @@
 const Solution = require('./solution.dal');
 
-exports.create = async (requestUser, solutionData) => {
-  const result = await Solution.create({ ...solutionData, user: requestUser });
+exports.create = async (question, user, solutionData) => {
+  const result = await Solution.create(question, user, solutionData);
   return result;
 };
 
-exports.list = async () => {
-  const solutions = await Solution.list();
+exports.list = async (query) => {
+  const solutions = await Solution.list(query);
   return solutions;
 };
 
-exports.update = async (id, solutionData) => {
-  await Solution.update({ _id: id }, solutionData);
+exports.getOne = async (id) => {
+  const solution = await Solution.getOne(id);
+  return solution;
+};
+
+exports.update = async (id, user, solutionData) => {
+  await Solution.update(id, user, solutionData);
 };

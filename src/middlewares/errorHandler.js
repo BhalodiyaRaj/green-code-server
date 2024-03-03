@@ -19,7 +19,7 @@ const errorHandler = (err, req, res, next) => {
     Logger.error({ message: 'ValidationError', stack: JSON.stringify(validationErrorObj.body.errors) });
     return res.status(validationErrorObj.httpStatusCode).json(validationErrorObj.body);
   }
-  Logger.error(err);
+
   if (err.name === 'MongoServerError' && err.code === 11000) {
     const duplicateKeyErrorObj = errorCodes.DUPLICATE_KEY_VALUE;
     return res.status(duplicateKeyErrorObj.httpStatusCode).json(duplicateKeyErrorObj.body);
@@ -28,7 +28,9 @@ const errorHandler = (err, req, res, next) => {
     const errorObj = errorCodes[err.message];
     if (errorObj) return res.status(errorObj.httpStatusCode).json(errorObj.body);
   }
-  return res.status(500).json(err);
+  console.log(err);
+  Logger.error(err);
+  return res.status(500).json({ message: 'internal server error' });
 };
 
 module.exports = errorHandler;

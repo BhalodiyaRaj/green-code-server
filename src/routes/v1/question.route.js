@@ -27,10 +27,10 @@ const router = express.Router();
  *         type: number
  *         in: query
  *         description: limit of the question
- *       - name: offset
+ *       - name: skip
  *         type: number
  *         in: query
- *         description: offset of the question
+ *         description: skip number of the question
  *       - name: level
  *         type: string
  *         in: query
