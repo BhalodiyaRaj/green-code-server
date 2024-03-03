@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { MongoId } = require('../../utils/validationHelper');
+const { Schema } = require('../../utils/validationHelper');
 
 module.exports = {
 
@@ -9,16 +9,9 @@ module.exports = {
     }),
   },
 
-  list: {
-    query: Joi.object({
-      limit: Joi.number().integer(),
-      offset: Joi.number().integer(),
-    }),
-  },
-
   update: {
     params: Joi.object({
-      id: MongoId.required(),
+      id: Schema.mongoId.required(),
     }),
     body: Joi.object({
       name: Joi.string().required(),
@@ -27,7 +20,7 @@ module.exports = {
 
   delete: {
     params: Joi.object({
-      id: MongoId.required(),
+      id: Schema.mongoId.required(),
     }),
   },
 

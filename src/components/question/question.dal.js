@@ -20,8 +20,8 @@ exports.model = Question;
  * @returns
  */
 
-exports.create = async (questionData) => {
-  const newQuestion = new Question(questionData);
+exports.create = async (user, data) => {
+  const newQuestion = new Question({ ...data, createdBy: user, updatedBy: user });
   await newQuestion.save();
   return newQuestion.info();
 };
@@ -41,7 +41,7 @@ exports.create = async (questionData) => {
  * @returns {Promise<Array<Object>>} - A promise that resolves to an array of question objects.
  */
 
-exports.list = async (search, level, categories, limit, offset, requestUser) => {
+exports.list = async (search, level, categories, limit, skip, requestUser) => {
   const aggregationMatch = {
     $or: [
       { title: { $regex: search, $options: 'i' } },
@@ -55,7 +55,7 @@ exports.list = async (search, level, categories, limit, offset, requestUser) => 
   const pipeline = [
     { $match: aggregationMatch },
     { $sort: { createdAt: 1 } },
-    { $skip: offset },
+    { $skip: skip },
     { $limit: limit },
     {
       $lookup: {
@@ -76,18 +76,14 @@ exports.list = async (search, level, categories, limit, offset, requestUser) => 
         as: 'likesArray',
       },
     },
-    { $addFields: { likes: { $size: '$likesArray' } } },
-  ];
-  if (requestUser) {
-    pipeline.push({
+    {
       $addFields: {
-        isLiked: {
-          $cond: { if: { $in: [requestUser, '$likesArray.user'] }, then: true, else: false },
-        },
+        likes: { $size: '$likesArray' },
+        isLiked: { $in: [requestUser, '$likesArray.user'] },
       },
-    });
-  }
-  pipeline.push({ $project: { likesArray: 0 } });
+    },
+    { $project: { likesArray: 0 } },
+  ];
 
   const questions = await Question.aggregate(pipeline);
   return questions;
@@ -127,19 +123,15 @@ exports.getById = async (id, requestUser) => {
         as: 'likesArray',
       },
     },
-    { $addFields: { likes: { $size: '$likesArray' } } },
-  ];
-  if (requestUser) {
-    pipeline.push({
+    {
       $addFields: {
-        isLiked: {
-          $cond: { if: { $in: [requestUser, '$likesArray.user'] }, then: true, else: false },
-        },
+        likes: { $size: '$likesArray' },
+        isLiked: { $in: [requestUser, '$likesArray.user'] },
       },
-    });
-  }
+    },
+    { $project: { likesArray: 0 } },
+  ];
 
-  pipeline.push({ $project: { likesArray: 0 } });
 
   const question = await Question.aggregate(pipeline);
   return question[0];

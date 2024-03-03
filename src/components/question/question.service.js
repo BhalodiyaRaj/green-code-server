@@ -4,16 +4,16 @@ const Like = require('../../models/like.model');
 
 
 
-exports.create = async (questionData) => {
-  const newQuestion = await QuestionDal.create(questionData);
+exports.create = async (user, requestBody) => {
+  const newQuestion = await QuestionDal.create(user, requestBody);
   return { question: newQuestion };
 };
 
 
 
 exports.list = async (requestBody) => {
-  const { limit = 5, offset = 0, search = '', level, categories, user } = requestBody;
-  const questions = await QuestionDal.list(search, level, categories, limit, offset, user);
+  const { limit, skip, search = '', level, categories, user } = requestBody;
+  const questions = await QuestionDal.list(search, level, categories, limit, skip, user);
   return questions;
 };
 

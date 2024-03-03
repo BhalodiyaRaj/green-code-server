@@ -10,7 +10,7 @@ list:
         title:
           type: string
           description: The question.
-        question:
+        body:
           type: string
           description: The answer to the question.
         level:
@@ -42,7 +42,7 @@ create:
       title:
         type: string
         description: The question.
-      question:
+      body:
         type: string
         description: The answer to the question.
       level:
@@ -63,7 +63,7 @@ create:
       title:
         type: string
         description: The question.
-      question:
+      body:
         type: string
         description: The answer to the question.
       level:
@@ -98,7 +98,7 @@ get:
       title:
         type: string
         description: The question.
-      question:
+      body:
         type: string
         description: The answer to the question.
       level:
@@ -130,7 +130,7 @@ update:
       title:
         type: string
         description: The question.
-      question:
+      body:
         type: string
         description: The answer to the question.
       level:
@@ -151,7 +151,7 @@ update:
       title:
         type: string
         description: The question.
-      question:
+      body:
         type: string
         description: The answer to the question.
       level:
