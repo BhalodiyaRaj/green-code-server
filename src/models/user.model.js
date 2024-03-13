@@ -42,7 +42,7 @@ schema.method({
     };
   },
   token() {
-    return jwt.sign({ id: this._id, role: this.role }, vars.jwtSecret, {
+    return jwt.sign({ _id: this._id, role: this.role }, vars.jwtSecret, {
       expiresIn: '10h',
     });
   },

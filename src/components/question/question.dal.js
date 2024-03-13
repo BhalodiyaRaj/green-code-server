@@ -4,6 +4,7 @@ const Question = require('../../models/question.model');
 
 
 
+
 /**
  * The Question model.
  *
@@ -79,7 +80,7 @@ exports.list = async (search, level, categories, limit, skip, requestUser) => {
     {
       $addFields: {
         likes: { $size: '$likesArray' },
-        isLiked: { $in: [requestUser, '$likesArray.user'] },
+        isLiked: { $in: [requestUser, '$likesArray.createdBy'] },
       },
     },
     { $project: { likesArray: 0 } },
@@ -126,7 +127,7 @@ exports.getById = async (id, requestUser) => {
     {
       $addFields: {
         likes: { $size: '$likesArray' },
-        isLiked: { $in: [requestUser, '$likesArray.user'] },
+        isLiked: { $in: [requestUser, '$likesArray.createdBy'] },
       },
     },
     { $project: { likesArray: 0 } },

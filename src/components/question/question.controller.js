@@ -2,7 +2,7 @@ const QuestionService = require('./question.service');
 
 exports.create = async (req, res, next) => {
   try {
-    const question = await QuestionService.create(req.userId, req.body);
+    const question = await QuestionService.create(req.user._id, req.body);
     return res.status(200).json(question);
   } catch (error) {
     return next(error);
@@ -11,7 +11,7 @@ exports.create = async (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const questions = await QuestionService.list({ ...req.query, user: req.userId });
+    const questions = await QuestionService.list({ ...req.query, user: req.user?._id });
     return res.status(200).json(questions);
   } catch (error) {
     return next(error);
@@ -20,7 +20,7 @@ exports.list = async (req, res, next) => {
 
 exports.getOne = async (req, res, next) => {
   try {
-    const question = await QuestionService.getOne(req.params.id, req.userId);
+    const question = await QuestionService.getOne(req.params.id, req.user?._id);
     return res.status(200).json(question);
   } catch (error) {
     return next(error);

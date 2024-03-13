@@ -1,7 +1,6 @@
 const express = require('express');
 const { validate } = require('../../utils/validationHelper');
 const { isSuperuser } = require('../../middlewares/auth');
-const parseUser = require('../../middlewares/parseUser');
 
 const Question = require('../../components/question');
 
@@ -106,7 +105,7 @@ const router = express.Router();
  */
 
 router.route('/')
-  .get(parseUser, validate(Question.validation.list), Question.controller.list)
+  .get(validate(Question.validation.list), Question.controller.list)
   .post(isSuperuser, validate(Question.validation.create), Question.controller.create);
 
 /**
@@ -170,12 +169,8 @@ router.route('/')
  *           schema:
  *             $ref: 'components/question.yaml#/update/request'
  *     responses:
- *       200:
- *         description: A question
- *         content:
- *           application/json:
- *             schema:
- *               $ref: 'components/question.yaml#/update/response'
+ *       204:
+ *         description: Question updated - No content
  *       400:
  *         description: Bad request
  *         content:
@@ -196,7 +191,7 @@ router.route('/')
  *               $ref: 'components/error.yaml#/response/error'
  */
 router.route('/:id')
-  .get(parseUser, validate(Question.validation.getOne), Question.controller.getOne)
+  .get(validate(Question.validation.getOne), Question.controller.getOne)
   .put(isSuperuser, validate(Question.validation.update), Question.controller.update);
 
 module.exports = router;

@@ -149,7 +149,7 @@ router.route('/')
  *           type: integer
  *     responses:
  *       204:
- *        description: Category deleted - No content
+ *         description: Category deleted - No content
  *       400:
  *         description: Bad request
  *         content:
