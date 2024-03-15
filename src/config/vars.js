@@ -6,10 +6,10 @@ const env = {
   port: process.env.SERVER_PORT || 3007,
   serviceName: process.env.SERVICE_NAME || 'Green Code',
   jwtSecret: process.env.JWT_SECRET,
-  mongoDevUri: process.env.MONGO_URI_DEV,
+  mongoDevUri: process.env.MONGO_URI_DEV || process.env.MONGO_URI,
   mongoUri: process.env.MONGO_URI,
-  consoleLogLevel: process.env.CONSOLE_LOG_LEVEL,
-  fileLogLevel: process.env.FILE_LOG_LEVEL,
+  consoleLogLevel: process.env.CONSOLE_LOG_LEVEL || 'info',
+  fileLogLevel: process.env.FILE_LOG_LEVEL || 'block',
 };
 
 // Define validation for all the env vars

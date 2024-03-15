@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { ObjectId } = require('mongoose').Types;
 
 module.exports = {
 
@@ -24,13 +25,13 @@ module.exports = {
   getOne: {
     params: Joi.object({
       id: Joi.string().hex().length(24).required(),
-    }),
+    }).custom((obj) => ({ ...obj, id: new ObjectId(obj.id) })),
   },
 
   update: {
     params: Joi.object({
       id: Joi.string().hex().length(24).required(),
-    }),
+    }).custom((obj) => ({ ...obj, id: new ObjectId(obj.id) })),
     body: Joi.object({
       title: Joi.string().min(5).max(70),
       body: Joi.string().min(5).max(500),
