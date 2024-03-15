@@ -1,4 +1,5 @@
 module.exports = {
+
   DUPLICATE_KEY_VALUE: {
     httpStatusCode: 409,
     body: {
@@ -6,6 +7,7 @@ module.exports = {
       message: 'Value already existed',
     },
   },
+
   INTERNAL_SERVER_ERROR: {
     httpStatusCode: 500,
     body: {
@@ -13,6 +15,7 @@ module.exports = {
       message: 'Something went wrong, please try again later.',
     },
   },
+
   NOT_FOUND: {
     httpStatusCode: 404,
     body: {
@@ -20,6 +23,7 @@ module.exports = {
       message: 'You lost somewhere. Please check url again.',
     },
   },
+
   RESOURCE_NOT_FOUND: {
     httpStatusCode: 404,
     body: {
@@ -27,6 +31,7 @@ module.exports = {
       message: 'Requested resource not found.',
     },
   },
+
   RESOURCE_ALREADY_EXISTS: {
     httpStatusCode: 409,
     body: {
@@ -34,6 +39,7 @@ module.exports = {
       message: 'Requested resource already exists.',
     },
   },
+
   FORBIDDEN: {
     httpStatusCode: 403,
     body: {
@@ -41,6 +47,7 @@ module.exports = {
       message: 'Permission denied.',
     },
   },
+
   UNAUTHORIZED: {
     httpStatusCode: 401,
     body: {
@@ -48,6 +55,7 @@ module.exports = {
       message: 'You are not authorized.',
     },
   },
+
   TOKEN_EXPIRED: {
     httpStatusCode: 401,
     body: {
@@ -55,6 +63,7 @@ module.exports = {
       message: 'Provided authorization token has been expired. Please renew token with provider entity.',
     },
   },
+
   CONFLICT: {
     httpStatusCode: 409,
     body: {
@@ -62,6 +71,7 @@ module.exports = {
       message: 'Duplicate resource',
     },
   },
+
   INVALID_DATA: {
     httpStatusCode: 400,
     body: {
@@ -69,6 +79,7 @@ module.exports = {
       message: 'Provided arguments are invalid or does not exists',
     },
   },
+
   NOT_IMPLEMENTED: {
     httpStatusCode: 501,
     body: {
@@ -76,6 +87,7 @@ module.exports = {
       message: 'Server does not support the functionality required to fulfill the request.',
     },
   },
+
   UNPROCESSABLE: {
     httpStatusCode: 422,
     body: {
@@ -83,6 +95,7 @@ module.exports = {
       message: 'The request is unable to be processed.',
     },
   },
+
   PERMISSION_DENIED: {
     httpStatusCode: 403,
     body: {
@@ -90,4 +103,5 @@ module.exports = {
       message: 'Permission denied.',
     },
   },
+
 };

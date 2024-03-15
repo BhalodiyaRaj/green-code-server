@@ -10,6 +10,9 @@ cd green-code-server
 npm install
 npm run docs
 npm start
+
+# to run in Development
+npm run dev # will provide hot reload
 ```
 
 ### API documentation
