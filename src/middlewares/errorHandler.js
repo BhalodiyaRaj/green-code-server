@@ -2,6 +2,7 @@ const expressValidation = require('express-validation');
 const { errorCodes } = require('../config/constants');
 const Logger = require('../lib/logger');
 
+// TODO: improve error transformation
 const convertValidationError = (err) => {
   const errors = [];
   Object.keys(err.details).forEach((location) => {
@@ -24,12 +25,16 @@ const errorHandler = (err, req, res, next) => {
     const duplicateKeyErrorObj = errorCodes.DUPLICATE_KEY_VALUE;
     return res.status(duplicateKeyErrorObj.httpStatusCode).json(duplicateKeyErrorObj.body);
   }
+
   if (err.message) {
     const errorObj = errorCodes[err.message];
     if (errorObj) return res.status(errorObj.httpStatusCode).json(errorObj.body);
   }
+
+  // TODO : remove when improve logging
   console.log(err);
   Logger.error(err);
+
   return res.status(500).json({ message: 'internal server error' });
 };
 

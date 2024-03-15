@@ -22,6 +22,7 @@ app.use(parseUser);
 
 const versionOneRoutes = require('./routes/v1');
 
+// Health check route to verify if the server is running or not
 app.get('/health', (req, res) => {
   res.send('ok');
 });
