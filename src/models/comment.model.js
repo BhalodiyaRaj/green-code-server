@@ -1,15 +1,20 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  user: {
+  createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'user',
   },
-  question: {
+  reference: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'question',
+    refPath: 'type',
+  },
+  type: {
+    type: String,
+    required: true,
+    enum: ['question', 'comment'],
   },
   body: {
     type: String,

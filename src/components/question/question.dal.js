@@ -1,5 +1,4 @@
 /* eslint-disable no-multiple-empty-lines */
-const mongoose = require('mongoose');
 const Question = require('../../models/question.model');
 
 
@@ -104,7 +103,7 @@ exports.list = async (search, level, categories, limit, skip, requestUser) => {
 
 exports.getById = async (id, requestUser) => {
   const pipeline = [
-    { $match: { _id: new mongoose.Types.ObjectId(id) } },
+    { $match: { _id: id } },
     {
       $lookup: {
         from: 'categories',
