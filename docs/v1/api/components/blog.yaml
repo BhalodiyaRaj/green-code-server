@@ -1,0 +1,63 @@
+create:
+  request:
+    type: object
+    properties:
+      title:
+        type: string
+        description: The title of the blog.
+      body:
+        type: string
+        description: The body of the blog.
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the blog.
+      title:
+        type: string
+        description: The title of the blog.
+      body:
+        type: string
+        description: The body of the blog.
+
+list:
+  response:
+    type: array
+    items:
+      type: object
+      properties:
+        _id:
+          type: integer
+          description: The unique identifier of the blog.
+        title:
+          type: string
+          description: The title of the blog.
+        body:
+          type: string
+          description: The body of the blog.
+
+getOne:
+  response:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: The unique identifier of the blog.
+      title:
+        type: string
+        description: The title of the blog.
+      body:
+        type: string
+        description: The body of the blog.
+
+update:
+  request:
+    type: object
+    properties:
+      title:
+        type: string
+        description: The title of the blog.
+      body:
+        type: string
+        description: The body of the blog.
