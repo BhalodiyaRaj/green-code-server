@@ -19,6 +19,9 @@ module.exports = {
       skip: Joi.number().default(0),
       level: Joi.string().valid('hard', 'medium', 'easy'),
       categories: Joi.array().items(Joi.string().length(24)).single(true),
+    }).custom((obj) => {
+      if (obj.categories) return { ...obj, categories: obj.categories.map((id) => new ObjectId(id)) };
+      return obj;
     }),
   },
 
