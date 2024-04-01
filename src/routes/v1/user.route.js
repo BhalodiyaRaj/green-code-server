@@ -90,4 +90,27 @@ router.route('/register').post(validate(User.validation.register), User.controll
  */
 router.route('/login').post(validate(User.validation.login), User.controller.login);
 
+/**
+ * @swagger
+ * /users/logout:
+ *   post:
+ *     summary: Logout User
+ *     tags:
+ *       - User
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       204:
+ *         description: No content
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'components/error.yaml#/response/error'
+ */
+router.route('/logout').post(User.controller.logout);
+
 module.exports = router;
