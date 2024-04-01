@@ -19,3 +19,13 @@ exports.login = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.logout = async (req, res, next) => {
+  try {
+    res.clearCookie('token');
+    res.clearCookie('user');
+    return res.status(204).send();
+  } catch (error) {
+    return next(error);
+  }
+};
