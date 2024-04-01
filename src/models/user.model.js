@@ -48,6 +48,7 @@ schema.method({
 
   info() {
     return {
+      _id: this._id,
       username: this.username,
       email: this.email,
       role: this.role,
