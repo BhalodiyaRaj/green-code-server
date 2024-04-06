@@ -28,7 +28,7 @@ exports.create = async (userId, type, reference, body) => {
  * @returns {Promise<Comment[]>} The list of comments.
  */
 exports.list = async (userId, type, reference) => {
-  const comments = await Comment.find({ createdBy: userId, type, reference });
+  const comments = await Comment.find({ type, reference }).populate('createdBy', 'username email');
   return comments;
 };
 
